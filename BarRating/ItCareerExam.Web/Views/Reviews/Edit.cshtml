@@ -1,0 +1,40 @@
+﻿@model ItCareerExam.Web.DTOs.Reviews.EditReviewDTO
+
+@{
+    ViewData["Title"] = "Edit";
+    var imageSrc = Model.Photo ?? "https://cdn-icons-png.flaticon.com/512/2065/2065224.png";
+}
+
+
+<div class="card light-shadow m-0 m-auto col-5">
+    <div class="img-fluid text-center mt-2">
+        <img class="card-img-top img-fluid" style="width: 20rem" style="object-fit: contain" src="@imageSrc" alt="Person image">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Edit the review for @Model.Bar</h5>
+        <div>
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input asp-for="Id" type="hidden" value="@Model.Id" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Text" class="control-label"></label>
+                    <textarea rows="5" asp-for="Text" class="form-control description-input"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Score" class="control-label"></label>
+                    <input asp-for="Score" class="form-control file-input" accept="image/*" />
+                    <span asp-validation-for="Score" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Edit" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

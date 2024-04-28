@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ItCareerExam.Web.DTOs.Reviews.ReviewDTO>
+
+@{
+    ViewData["Title"] = "Reviews";
+}
+
+@if (Model.Any())
+{
+    <div>
+        @foreach (var reviewDTO in Model)
+        {
+            <div class="w-100 d-flex align-items-center bg-white m-1 p-3 rounded-3 light-shadow">
+                <div class="d-inline-flex justify-content-center col-3 flex-column align-items-center">
+                    <img class="card-img-top" src="@reviewDTO.Photo" style="max-width: 150px; max-height: 150px; margin: 0 auto;" alt="image">
+                </div>
+
+                <div class="d-inline-flex flex-column col-4">
+                    @reviewDTO.Bar
+                    @if (User.IsAdmin())
+                    {
+                        <span>
+                            Written by: @($"{reviewDTO.FirstName} {reviewDTO.LastName} ({reviewDTO.Username})")
+                            <a asp-controller="Users" asp-action="Details" asp-route-id="@reviewDTO.UserId" class="mb-1">
+                                <button class="btn btn-sm btn-primary">
+                                    User info
+                                    <i class="fas fa-info-circle"></i>
+                                </button>
+                            </a>
+                        </span>
+                    }
+                    <span class="review-text">Review text: @reviewDTO.Text</span>
+                    <span>Review score: @reviewDTO.Score</span>
+                </div>
+                <div class="d-inline-flex justify-content-center col-2">
+                </div>
+                <div class="d-inline-flex justify-content-center col-3 flex-column align-items-center">
+                    @if (User.IsAdmin() || reviewDTO.UserId == User.GetId())
+                    {
+                        <button class="btn btn-danger deleteReview" data-id="@reviewDTO.Id">
+                            <i class="fas fa-unlink"></i> Remove review
+                        </button>
+
+                        <a asp-controller="Reviews" asp-action="Edit" asp-route-id="@reviewDTO.Id">
+                            <button class="btn btn-warning">
+                                <i class="fas fa-edit"></i> Edit review
+                            </button>
+                        </a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3>No reviews found!</h3>
+}
+
+<script src="~/js/deleteScript.js"></script>
+<script>
+    setupDeleteConfirmation('.deleteReview', 'Reviews', 'review');
+</script>

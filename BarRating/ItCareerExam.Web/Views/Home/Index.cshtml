@@ -1,0 +1,50 @@
+﻿@inject ItCareerExam.Services.Data.Users.IUsersService UsersService
+@inject ItCareerExam.Services.Data.Bars.IBarsService BarsService
+@inject ItCareerExam.Services.Data.Reviews.IReviewsService ReviewsService
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (User.IsAdmin())
+{
+    <div class="text-center">
+        <h1 class="display-4">Admin statistics</h1>
+        <h4 style="margin-top: 30px">See how your website is doing!</h4>
+    </div>
+    <br />
+
+    <div class="card rounded-0">
+        <h3 class="card-header h5 rounded-0">
+            Platform statistics
+        </h3>
+        <div class="card-block">
+            <ul class="list-group">
+                <li class="list-group-item d-flex bg-white justify-content-between align-items-center">
+                    <div class="col-10 d-flex justify-content-between align-items-center m-2">
+                        Users
+                        <span class="badge badge-secondary bg-secondary">@UsersService.GetUsersCount()</span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex bg-light justify-content-between align-items-center">
+                    <div class="col-10 d-flex justify-content-between align-items-center m-2">
+                        Bars
+                        <span class="badge badge-secondary bg-secondary">@BarsService.GetBarsCount()</span>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex bg-white justify-content-between align-items-center">
+                    <div class="col-10 d-flex justify-content-between align-items-center m-2">
+                        Reviews
+                        <span class="badge badge-secondary bg-secondary">@ReviewsService.GetReviewCount()</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">The coolest bars!</h1>
+        <h4 style="margin-top: 30px">Do you like going to bars? Look at our bars and leave a review!</h4>
+    </div>
+}

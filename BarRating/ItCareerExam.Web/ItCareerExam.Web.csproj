@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-ItCareerExam.Web-4c0faaa0-f667-4358-a9a4-555b695a5719</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.26" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.26" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.26" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.26" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.26" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItCareerExam.Data.Models\ItCareerExam.Data.Models.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Data\ItCareerExam.Data.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Infrastructure\ItCareerExam.Infrastructure.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Services.Data\ItCareerExam.Services.Data.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Web.DTOs\ItCareerExam.Web.DTOs.csproj" />
+  </ItemGroup>
+
+</Project>

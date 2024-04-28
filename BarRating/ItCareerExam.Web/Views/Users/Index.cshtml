@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ItCareerExam.Web.DTOs.Users.UserDTO>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Users</h1>
+
+@if (User.IsAdmin())
+{
+    <p>
+        <a asp-action="Create">
+            <button class="btn btn-success">
+                <i class="fas fa-user-plus"></i> New User
+            </button>
+        </a>
+    </p>
+}
+
+<div class="input-group d-flex justify-content-center mt-3">
+    <div class="form-outline">
+        <input type="search" id="name" class="form-control" />
+    </div>
+    <button type="button" id="search-btn" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+
+@if (Model.Any())
+{
+    <div class="users-wrapper d-flex flex-wrap justify-content-evenly">
+        @foreach (var user in Model)
+        {
+            <div class="card light-shadow m-2" style="flex-basis: 25%">
+                <img class="card-img-top" src="~/images/user.png" style="max-width: 200px; margin: 0 auto;" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">@($"{user.FirstName} {user.LastName}")</h5>
+                    <p class="card-text">@user.Username</p>
+
+                    <hr />
+                    <div class="buttons-holder d-flex flex-wrap">
+                        <a asp-action="Details" asp-route-id="@user.Id" class="mb-1" style="width: 95%">
+                            <button class="btn btn-primary" style="width: 95%">
+                                <i class="fas fa-info-circle"></i> More info
+                            </button>
+                        </a>
+
+                        @if (User.IsAdmin())
+                        {
+                            <div class="d-flex justify-content-around" style="width: 95%">
+                                <a asp-action="Edit" asp-route-id="@user.Id" class="m-1">
+                                    <button class="btn btn-warning">
+                                        <i class="fas fa-user-edit"></i> Edit
+                                    </button>
+                                </a>
+
+                                @if (User.GetId() != user.Id)
+                                {
+                                    <button class="btn btn-danger deleteUser" data-id="@user.Id">
+                                        <i class="fas fa-user-times"></i> Delete
+                                    </button>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1>No users found!</h1>
+}
+
+<script src="~/js/deleteScript.js"></script>
+<script src="js/searchScript.js"></script>
+<script>
+    setupSearch('#search-btn', '#name', 'Users');
+    setupDeleteConfirmation('.deleteUser', 'Users', 'user');
+</script>

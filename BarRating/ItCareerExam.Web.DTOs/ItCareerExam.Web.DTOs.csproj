@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItCareerExam.Common\ItCareerExam.Common.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Data.Models\ItCareerExam.Data.Models.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Infrastructure\ItCareerExam.Infrastructure.csproj" />
+    <ProjectReference Include="..\ItCareerExam.Services.Mapping\ItCareerExam.Services.Mapping.csproj" />
+  </ItemGroup>
+
+</Project>

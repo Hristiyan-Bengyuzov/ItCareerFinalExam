@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ItCareerExam.Web.DTOs.Bars.BarDTO>
+<h1>Bars</h1>
+
+@if (User.IsAdmin())
+{
+    <p>
+        <a asp-action="Create">
+            <button class="btn btn-success">
+                <i class="fas fa-user-plus"></i> New Bar
+            </button>
+        </a>
+    </p>
+}
+
+<div class="input-group d-flex justify-content-center mt-3">
+    <div class="form-outline">
+        <input type="search" id="keyword" class="form-control" />
+    </div>
+    <button type="button" id="search-btn" class="btn btn-primary">
+        <i class="fas fa-search"></i>
+    </button>
+</div>
+
+@if (Model.Any())
+{
+    <div class="users-wrapper d-flex flex-wrap justify-content-evenly">
+        @foreach (var barDTO in Model)
+        {
+            <div class="card light-shadow m-2" style="flex-basis: 35%">
+                <img class="card-img-top" src="@barDTO.Photo" style="max-width: 250px; margin: 0 auto;" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title">@barDTO.Name</h5>
+                    <p class="card-text">@barDTO.Description</p>
+
+                    <hr />
+                    <div class="buttons-holder d-flex flex-wrap">
+                        <a asp-action="Details" asp-route-id="@barDTO.Id" class="mb-1" style="width: 95%">
+                            <button class="btn btn-primary" style="width: 95%">
+                                <i class="fas fa-info-circle"></i> More info
+                            </button>
+                        </a>
+
+                        @if (User.IsAdmin())
+                        {
+                            <div class="d-flex justify-content-around" style="width: 95%">
+                                <a asp-action="Edit" asp-route-id="@barDTO.Id" class="m-1">
+                                    <button class="btn btn-warning">
+                                        <i class="fas fa-user-edit"></i> Edit
+                                    </button>
+                                </a>
+
+                                <button class="btn btn-danger deleteBar" data-id="@barDTO.Id"> 
+                                    <i class="fas fa-user-times"></i> Delete
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h1>No bars found!</h1>
+}
+
+<script src="~/js/deleteScript.js"></script>
+<script src="~/js/searchScript.js"></script>
+<script>
+    setupSearch('#search-btn', '#keyword', 'Bars');
+    setupDeleteConfirmation('.deleteBar', 'Bars', 'bar');
+</script>

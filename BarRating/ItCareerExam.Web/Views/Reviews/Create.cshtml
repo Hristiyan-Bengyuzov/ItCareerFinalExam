@@ -1,0 +1,38 @@
+﻿@model ItCareerExam.Web.DTOs.Reviews.CreateReviewDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card light-shadow m-0 m-auto col-5">
+    <div class="img-fluid text-center mt-2">
+        <img class="card-img-top img-fluid" style="width: 20rem" style="object-fit: contain" src="https://cdn-icons-png.flaticon.com/512/2065/2065224.png" alt="Person image">
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Create new review</h5>
+        <div>
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="@Model.UserId" type="hidden" value="@Model.UserId" />
+                <input asp-for="@Model.BarId" type="hidden" value="@Model.BarId" />
+                <div class="form-group">
+                    <label asp-for="Text" class="control-label"></label>
+                    <textarea rows="5" asp-for="Text" class="form-control"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Score" class="control-label"></label>
+                    <input asp-for="Score" class="form-control" />
+                    <span asp-validation-for="Score" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
